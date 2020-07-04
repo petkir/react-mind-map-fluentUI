@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "react-mind-map-fluent-ui-client-side-solution",
+    "id": "61c943de-6ac9-4b5b-b6d6-09c239513a69",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false
+  },
+  "paths": {
+    "zippedPackage": "solution/react-mind-map-fluent-ui.sppkg"
+  }
+}
