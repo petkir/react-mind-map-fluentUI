@@ -11,6 +11,10 @@ npm i -g gulp
 gulp
 ```
 
+*PUT this file mindmapsample.txt in a doclib!!
+*https://xyz.sharepoint.com/_layouts/15/workbench.aspx Required for Listsubscriptions
+
+
 This package produces the following:
 
 * lib/* - intermediate-stage commonjs build artifacts

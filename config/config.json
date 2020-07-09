@@ -13,6 +13,8 @@
   },
   "externals": {},
   "localizedResources": {
-    "MindMapWebPartStrings": "lib/webparts/mindMap/loc/{locale}.js"
+    "MindMapWebPartStrings": "lib/webparts/mindMap/loc/{locale}.js",
+    "PropertyControlStrings": "node_modules/@pnp/spfx-property-controls/lib/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
   }
 }

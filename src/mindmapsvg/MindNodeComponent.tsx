@@ -105,7 +105,7 @@ export class MindNodeComponent extends React.Component<IMindNodeComponentProps, 
         return ({
             top: position.y + 'px',
             left: position.x + 'px'
-        })
+        });
     }
 
     /*

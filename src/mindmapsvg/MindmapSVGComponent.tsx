@@ -6,10 +6,13 @@ import { MindNodeComponent } from './MindNodeComponent';
 import { cloneDeep } from '@microsoft/sp-lodash-subset';
 
 
-export interface IMindMapSRVComponentProps { }
+export interface IMindMapSRVComponentProps {
+    model: IMindNode[];
+    modelChanged: (model: IMindNode[]) => void;
+}
 
 export interface IMindMapSRVComponentState {
-    model?: IMindNode[];
+
 
 }
 
@@ -17,48 +20,10 @@ export default class MindMapSRVComponent extends React.Component<IMindMapSRVComp
     // private board= React.useRef(); i will try without it
     constructor(props: IMindMapSRVComponentProps) {
         super(props);
-
-
-        this.state = {
-            model: [
-                {
-                    id: 'N1', title: 'Node1',
-                    position: { x: 10, y: 10 },
-                    children: [
-                        {
-                            id: 'N11', title: 'Node11',
-                            position: { x: 60, y: 80 },
-                            hasParent: true
-                        }, {
-                            id: 'N12', title: 'Node12',
-                            position: { x: 60, y: 180 },
-                            hasParent: true
-                        }, {
-                            id: 'N13', title: 'Node13',
-                            position: { x: 60, y: 280 },
-                            hasParent: true,
-                            children: [
-                                {
-                                    id: 'N131', title: 'Node131',
-                                    position: { x: 160, y: 80 },
-                                    hasParent: true
-                                },
-                                {
-                                    id: 'N132', title: 'Node132',
-                                    position: { x: 160, y: 180 },
-                                    hasParent: true
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-
-        };
     }
 
     public render(): React.ReactElement<IMindMapSRVComponentProps> {
-        if (this.state.model && this.state.model.length > 0) {
+        if (this.props.model && this.props.model.length > 0) {
             return (
                 <div className={styles.board} style={this.findMinHeight()}
 
@@ -66,7 +31,7 @@ export default class MindMapSRVComponent extends React.Component<IMindMapSRVComp
                     onDrop={this.onDrop.bind(this)}
                     onDragEnd={this.onDragEnd.bind(this)}
                 >
-                    {this.state.model.map((x, i) => {
+                    {this.props.model.map((x, i) => {
                         return (
                             <MindNodeComponent {...x} key={'c' + x.id}
                                 onDragStart={this.onDragStart.bind(this)}
@@ -106,21 +71,18 @@ export default class MindMapSRVComponent extends React.Component<IMindMapSRVComp
         const nodeId = event.dataTransfer.getData("Text");
         console.log('getDataTransfer:' + nodeId);
         //picking current position calclate offset and set ist to treenode
-        const nextmodel = cloneDeep(this.state.model);
+        const nextmodel = cloneDeep(this.props.model);
         const item = this.findNodeInModel(nextmodel, nodeId);
 
         console.log(event.nativeEvent);
         console.log(event.nativeEvent.offsetX);
         console.log(event.nativeEvent.offsetY);
-        debugger;
         //item.position.x = item.position.x + event.nativeEvent.offsetX;
         //item.position.y = item.position.y + event.nativeEvent.offsetY;
-        item.position.x =  event.nativeEvent.offsetX;
-        item.position.y =  event.nativeEvent.offsetY;
+        item.position.x = event.nativeEvent.offsetX;
+        item.position.y = event.nativeEvent.offsetY;
 
-
-
-        this.setState({ model: nextmodel });
+        this.props.modelChanged(nextmodel);
         /*
         event.clientX
         event.clientY
